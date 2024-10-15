@@ -47,6 +47,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * Implementation of {@link FlinkService} submitting and interacting with Standalone Kubernetes
@@ -99,8 +100,8 @@ public class StandaloneFlinkService extends AbstractFlinkService {
         final int poolSize =
                 configuration.get(KubernetesConfigOptions.KUBERNETES_CLIENT_IO_EXECUTOR_POOL_SIZE);
 
-        ExecutorService executorService =
-                Executors.newFixedThreadPool(
+        ScheduledExecutorService executorService =
+                Executors.newScheduledThreadPool(
                         poolSize,
                         new ExecutorThreadFactory("flink-kubeclient-io-for-standalone-service"));
 
